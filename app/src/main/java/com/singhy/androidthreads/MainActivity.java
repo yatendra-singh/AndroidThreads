@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -13,6 +14,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private Button buttonStart, buttonStop;
     int count = 0;
     private boolean mStopLoop;
+    private TextView textViewCount;
 
 
     @Override
@@ -24,6 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         buttonStart = (Button) findViewById(R.id.buttonThreadStarter);
         buttonStop = (Button) findViewById(R.id.buttonStopthread);
+        textViewCount = (TextView) findViewById(R.id.textViewCount);
 
         buttonStart.setOnClickListener(this);
         buttonStop.setOnClickListener(this);
@@ -47,6 +50,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                                 Log.i(TAG, e.getMessage());
                             }
                             Log.i(TAG, "Thread id in while loop: " + Thread.currentThread().getId() + ", Count : " + count);
+                            textViewCount.setText(" "+count);
                         }
                     }
                 }).start();
