@@ -35,15 +35,22 @@ public class MainActivity extends Activity implements View.OnClickListener {
             case R.id.buttonThreadStarter:
                 mStopLoop = false;
 
-                while (!mStopLoop) {
-                    try {
-                        Thread.sleep(1000);
-                        count++;
-                    } catch (InterruptedException e) {
-                        Log.i(TAG, e.getMessage());
+                //creating a new thread and running loop inside it
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (!mStopLoop) {
+                            try {
+                                Thread.sleep(1000);
+                                count++;
+                            } catch (InterruptedException e) {
+                                Log.i(TAG, e.getMessage());
+                            }
+                            Log.i(TAG, "Thread id in while loop: " + Thread.currentThread().getId() + ", Count : " + count);
+                        }
                     }
-                    Log.i(TAG, "Thread id in while loop: " + Thread.currentThread().getId() + ", Count : " + count);
-                }
+                }).start();
+
                 break;
 
             case R.id.buttonStopthread:
